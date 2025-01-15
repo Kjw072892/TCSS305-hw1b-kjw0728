@@ -1,10 +1,10 @@
 # TCSS305
 
-[Assignemnt Name]
+Assignment 1b
 
-[Your Name]
+Kassie Whitney
 
-Winter 202[Y]
+Winter 2025
 
 ## Assignment Overview
 [Describe your understanding of the purpose and scope of the assignment 
