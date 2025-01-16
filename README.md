@@ -7,19 +7,26 @@ Kassie Whitney
 Winter 2025
 
 ## Assignment Overview
-[Describe your understanding of the purpose and scope of the assignment 
-in 250 words or less. The word count is not strict, so don't worry about
-going slightly over. Do not just copy text from the assignment description.]
+For assignment 1b, we were tasked to create a JUnit test that tests all 
+of our classes for the application, create our classes implementing the 
+interfaces we were given, and follow the applications API paperwork 
+(closly) whilst ensuring that all features were added to the application.
+The application we are to build is a generic online store application.
+We were given the GUI and our task was to connect the logic to the GUI.
+We are also tasked to ensure that we build and implement our own testing 
+platform to ensure that the application meets our standards and to potentially
+catch any feature breaking bugs before pushing the application to production.  
 
 ## Technical Impression:
-[Describe what you have done to complete the assignment in 200-500 words. 
-The word count is not strict, so don't worry about going slightly over; 
-however, summaries that do not meet the minimum length requirement or 
-are trivial in nature (representing little thought or effort) will not 
-get full credit. You can share your personal experiences, things that 
-particularly frustrated you about the assignment, things that particularly 
-interested you about the assignment, etc. It is especially important that
-you document any difficulties you had with tools, Java libraries, etc.]
+For the record, I will be recording my impressions everytime I work on this project. 
+First day of working on this project I was able to complete the StoreItem Class. 
+It wasn't too difficult since I had already done it once for assignment 1a. 
+The only difference was that I had to create an overriden toString method, 
+equals method, and hashCode method. 
+I have never created an equals method or hashCode method before, 
+so it was interesting learnig about how the two methods were suppose to work, 
+and the syntaxes that was required to get them to work the way the API paperwork needed them to work.
+
 
 ## Unresolved problems in my submission:
 [Use this space to list problems which you know exist in your submission. 
