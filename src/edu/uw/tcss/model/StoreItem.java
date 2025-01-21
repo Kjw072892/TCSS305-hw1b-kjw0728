@@ -155,13 +155,11 @@ public class StoreItem implements Item {
     @Override
     public boolean equals(final Object theItem) {
 
-        final StoreItem items = (StoreItem) theItem;
-
         return theItem != null && theItem.getClass() == this.getClass()
-                && items.getName().equals(this.getName())
-                && items.getPrice().equals(this.getPrice())
-                && items.getBulkPrice().equals(getBulkPrice())
-                && items.getBulkQuantity() == this.getBulkQuantity();
+                && ((StoreItem) theItem).getName().equals(this.myName)
+                && ((StoreItem) theItem).getPrice().equals(this.myPrice)
+                && ((StoreItem) theItem).getBulkPrice().equals(myBp)
+                && ((StoreItem) theItem).getBulkQuantity() == myBq;
     }
 
     @Override
