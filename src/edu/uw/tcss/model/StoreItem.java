@@ -155,24 +155,13 @@ public class StoreItem implements Item {
     @Override
     public boolean equals(final Object theItem) {
 
-        // checks if object reference are the same
-        if (this == theItem) {
-            return true;
-        }
+        final StoreItem items = (StoreItem) theItem;
 
-        // checks if object is null, or if the items are of the same class
-        if (theItem == null || getClass() != theItem.getClass()) {
-            return false;
-        }
-
-        // casting the StoreItem object to theItem
-        final StoreItem ti = (StoreItem) theItem;
-
-        //returns true if both objects are equal, else returns false
-        return Objects.equals(ti.getName(), getName())
-                && Objects.equals(ti.getPrice(), getPrice())
-                && ti.getBulkQuantity() == getBulkQuantity()
-                && Objects.equals(ti.getBulkPrice(), getBulkPrice());
+        return theItem != null && theItem.getClass() == this.getClass()
+                && items.getName().equals(this.getName())
+                && items.getPrice().equals(this.getPrice())
+                && items.getBulkPrice().equals(getBulkPrice())
+                && items.getBulkQuantity() == this.getBulkQuantity();
     }
 
     @Override

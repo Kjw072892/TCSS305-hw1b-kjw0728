@@ -39,7 +39,7 @@ public class StoreCart implements Cart {
 
         // Checks if the hashTable myShoppingCart contains the key (item name)
         if (myShoppingCart.containsKey(itemName)) {
-            // Checks if the obj. are equal and theOrder quantity is not zero
+            // Checks if the obj are equal and 'theOrder' quantity is not zero.
             if (myShoppingCart.get(itemName).getItem().equals(theOrder.getItem())
                     && theOrder.getQuantity() != 0) {
                 myShoppingCart.replace(itemName, theOrder);
@@ -95,7 +95,7 @@ public class StoreCart implements Cart {
 
             } else {
 
-                //if not bulk item, item price is multiplied by quantity to get total price
+                //The item price is multiplied by the quantity of the item passed to get total.
                 total = total.add(storeItem.getPrice().multiply(BigDecimal.valueOf(quantity)));
             }
 
