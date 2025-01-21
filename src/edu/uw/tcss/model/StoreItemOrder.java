@@ -63,7 +63,7 @@ public final class StoreItemOrder implements ItemOrder {
      */
     @Override
     public String toString() {
-        return "Item Name= " + myItem.getName() + " ( Quantity= " + myQuantity + ")";
+        return "Item Name= " + myItem.getName() + " (Quantity= " + myQuantity + ")";
     }
 
 }
