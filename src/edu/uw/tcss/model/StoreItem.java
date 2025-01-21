@@ -1,6 +1,9 @@
 package edu.uw.tcss.model;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
+import java.text.NumberFormat;
+import java.util.Locale;
 import java.util.Objects;
 
 /**
@@ -8,6 +11,7 @@ import java.util.Objects;
  * @version 1.15.25
  */
 public class StoreItem implements Item {
+
 
     /**
      * Field Variable that stores the item name.
@@ -29,11 +33,6 @@ public class StoreItem implements Item {
      */
     private final BigDecimal myBp;
 
-    /**
-     * Stores boolean values denoting if item is in bulk.
-     */
-    private final boolean myIsBulk;
-
 
     /**
      *
@@ -47,11 +46,11 @@ public class StoreItem implements Item {
 
         super();
 
-        if (theName.isEmpty() || thePrice == null) {
+        if (theName == null || thePrice == null) {
 
             throw new NullPointerException("Parameters must not be null");
         }
-        if (thePrice.intValue() < 0) {
+        if (thePrice.doubleValue() < 0 || theName.isEmpty()) {
 
             throw new IllegalArgumentException("Price must be greater than or equal to zero");
 
@@ -61,7 +60,6 @@ public class StoreItem implements Item {
             myPrice = thePrice;
             myBq = 0;
             myBp = BigDecimal.ZERO;
-            myIsBulk = false;
 
         }
     }
@@ -77,23 +75,16 @@ public class StoreItem implements Item {
      */
     public StoreItem(final String theName, final BigDecimal thePrice, final int theBq,
                      final BigDecimal theBp) throws IllegalArgumentException {
-
         super();
-
         new StoreItem(theName, thePrice);
-
-        if (0 <= theBq && 0.0 <= theBp.doubleValue()) {
-
+        if (theBq >= 0 && theBp.doubleValue() >= 0 && thePrice.doubleValue() >= 0) {
             myName = theName;
             myPrice = thePrice;
             myBq = theBq;
             myBp = theBp;
-            myIsBulk = true;
-
+            //myIsBulk = true;
         } else {
-
             throw new IllegalArgumentException("Parameters must be greater than zero");
-
         }
     }
 
@@ -119,7 +110,8 @@ public class StoreItem implements Item {
 
     @Override
     public boolean isBulk() {
-        return myIsBulk;
+
+        return myBq > 0;
     }
 
     /**
@@ -132,13 +124,23 @@ public class StoreItem implements Item {
      */
     @Override
     public String toString() {
+
+        final NumberFormat nf = NumberFormat.getCurrencyInstance(Locale.US);
+
         final String itemInfo;
 
-        if (myIsBulk) {
-            itemInfo = myName + ", $" + myPrice + " (" + myBq + " for $" + myBp + ")";
+        final String frmtPrice = nf.format(myPrice);
+
+        final String frmtBulkPrice = nf.format(myBp);
+
+        if (myBq > 0) {
+            itemInfo = myName + ", " + frmtPrice + " (" + myBq + " for " + frmtBulkPrice + ")";
+
         } else {
-            itemInfo = myName + ", $" + myPrice;
+            itemInfo = myName + ", " + frmtPrice;
+
         }
+
         return itemInfo;
     }
 

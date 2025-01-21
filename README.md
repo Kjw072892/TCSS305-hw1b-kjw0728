@@ -7,25 +7,37 @@ Kassie Whitney
 Winter 2025
 
 ## Assignment Overview
-For assignment 1b, we were tasked to create a JUnit test that tests all 
-of our classes for the application, create our classes implementing the 
-interfaces we were given, and follow the applications API paperwork 
-(closly) whilst ensuring that all features were added to the application.
-The application we are to build is a generic online store application.
-We were given the GUI and our task was to connect the logic to the GUI.
-We are also tasked to ensure that we build and implement our own testing 
-platform to ensure that the application meets our standards and to potentially
-catch any feature breaking bugs before pushing the application to production.  
+ For assignment 1b, the task involved creating a JUnit test to evaluate all classes for the application, 
+ implementing the provided interfaces to create the necessary classes, and closely follow the application's API 
+ documentation to ensure all features were added, The application being developed is a generic online store.
+ The user interacts with a GUI to add items in their shopping cart, and the GUI displays the number of items in 
+ their cart and the number of unique items inside their shopping cart, as well as the total price of all the items. 
+ The GUI was provided, and the task required connecting the application logic to the GUI.
+ Additionally, a custom testing platform was to be built and implemented to ensure the application meets defined 
+ standards and to itdentify any bugs that could potentially break features before the application is pushed to 
+ production.
 
 ## Technical Impression:
-For the record, I will be recording my impressions everytime I work on this project. 
-First day of working on this project I was able to complete the StoreItem Class. 
-It wasn't too difficult since I had already done it once for assignment 1a. 
-The only difference was that I had to create an overriden toString method, 
-equals method, and hashCode method. 
-I have never created an equals method or hashCode method before, 
-so it was interesting learnig about how the two methods were suppose to work, 
-and the syntaxes that was required to get them to work the way the API paperwork needed them to work.
+For the reccord, impressions will be recorded every time work is done on this project.
+On the first day of working on the project, the StoreItem class and the StoreItemOrder class were completed.
+The StoreItem class was not challenging at all, as it was more or less assignment 1a, which was previously completed.
+The primary difference was the need to create overridden methods of the toString, equals, and hashCode methods.
+Createing the equals and hashCode method was a new experience, since these methods were'nt used
+at all (although they were introduced) in CSS 142 and CSS 143. This provided an opportunity to relearn how these
+methods were to function within the project.
+The StoreItemOrder class was a similar experience to the StoreItem class.
+The most difficult class to construct from scratch was the StoreCart class.
+Apart from having to conduct research on what a record class is, how its implimented within a child class, and how 
+to utilize the getCartSize method throughout the class in order to ensure propper information was displayed in the 
+GUI, the add method was the real trouble maker.
+There was a persistent bug where everytime the user clicked on the quantity box in the GUI, the number of unique items
+inside the cart would increase.
+The debugger feature on intellij really helped narrow down the location of the bug within the add method.
+The second thing that was challenging was the calculate method.
+Although the concept is quiet simple, having to figure out how to cleanly write code to where the bulksets would get 
+multiplied to get the total price of the bulkset, and then add that to the total price of the remaining items not in 
+bulk, was definetly headache inducing.
+The next step now is to create the Tests for the application.
 
 
 ## Unresolved problems in my submission:
@@ -38,10 +50,8 @@ are listed here and a larger penalty for those which are not. Just say
 'none' if there are no issues that you are aware of.]
 
 ## Citations and Collaborations:
-[Use this space to cite sources of code used in completing this assignment. 
-If you use code from Stack Overflow , GitHub, or an other source, link to 
-the page here. If you worked with a fellow student or lab mentor, please 
-state the student’s name and discuss the nature of your collaboration.]
+StackOverflow, JAVA DOC, and various youtube videos were used during the production of this code for research, 
+learning, syntax, and general information about the record class, GUI operations, and data storages.
 
 ## Questions:
 [Use this space to ask questions that you still have about the assignment, 
