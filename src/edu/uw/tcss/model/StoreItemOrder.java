@@ -1,5 +1,7 @@
 package edu.uw.tcss.model;
 
+import java.util.Objects;
+
 /**
  * @author Kassie Whitney
  * @version 1.15.25
@@ -31,13 +33,11 @@ public final class StoreItemOrder implements ItemOrder {
         super();
 
         //Checks if object passed is null or if quantity is less than 0
-        if (theItem == null) {
-            throw new NullPointerException("Item object must not be null");
-        } else if (theQuantity < 0) {
-            throw new IllegalArgumentException("Quantity must be greater than or equal to "
-                    + "zero");
-        } else {
+        Objects.requireNonNull(theItem);
 
+        if (theQuantity <= 0) {
+            throw new IllegalArgumentException("The quantity must be greater than zero");
+        } else {
             myItem = theItem;
             myQuantity = theQuantity;
         }

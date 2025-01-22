@@ -43,21 +43,16 @@ public class StoreCart implements Cart {
             if (myShoppingCart.get(itemName).getItem().equals(theOrder.getItem())
                     && theOrder.getQuantity() != 0) {
                 myShoppingCart.replace(itemName, theOrder);
-                getCartSize();
             }
             //removes the item from the shopping cart if
             if (theOrder.getQuantity() != myShoppingCart.get(itemName).getQuantity()
                     || theOrder.getQuantity() == 0) {
                 myShoppingCart.remove(itemName);
-                getCartSize();
             }
         } else {
-
             if (theOrder.getQuantity() != 0) {
                 myShoppingCart.put(itemName, theOrder);
-                getCartSize();
             }
-            getCartSize();
         }
     }
 

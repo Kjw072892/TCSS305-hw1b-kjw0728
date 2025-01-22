@@ -6,11 +6,20 @@ import java.util.Locale;
 import java.util.Objects;
 
 /**
- * @author Kassie Whitney
+ *  @author Kassie Whitney
  * @version 1.20.25
  */
 public class StoreItem implements Item {
 
+    /**
+     * Stores the default minValue
+     */
+    private static final int DEFAULT_INT = 0;
+
+    /**
+     * Stores the default Bigdecimal minValue
+     */
+    private static final BigDecimal DEFAULT_BD = BigDecimal.ZERO;
 
     /**
      * Field Variable that stores the item name.
@@ -33,35 +42,25 @@ public class StoreItem implements Item {
     private final BigDecimal myBp;
 
 
+
+
+
+
     /**
      *
      * Constructor for the StoreItem class.
      *
      * @param theName The name of the item.
      * @param thePrice  The price of the item.
+     * @throws IllegalArgumentException when thePrice is less than zero.
+     * @throws NullPointerException when theName is null.
      */
     public StoreItem(final String theName, final BigDecimal thePrice)
-            throws IllegalArgumentException, NullPointerException {
+        throws IllegalArgumentException, NullPointerException {
 
-        super();
+        this(theName, thePrice, 0, BigDecimal.ZERO);
 
-        if (theName == null || thePrice == null) {
-
-            throw new NullPointerException("Parameters must not be null");
-        }
-        if (thePrice.doubleValue() < 0 || theName.isEmpty()) {
-
-            throw new IllegalArgumentException("Price must be greater than or equal to zero");
-
-        } else {
-
-            myName = theName;
-            myPrice = thePrice;
-            myBq = 0;
-            myBp = BigDecimal.ZERO;
-
-        }
-    }
+}
 
     /**
      *
@@ -71,19 +70,30 @@ public class StoreItem implements Item {
      * @param thePrice The price of the item.
      * @param theBq The bulk quanity of the item.
      * @param theBp The price of the item in bulk quanity.
+     * @throws NullPointerException theName, thePrice, or theBp can not be null.
+     * @throws IllegalArgumentException thePrice or theBq or theBp must not be negative,
+     * @throws IllegalArgumentException theName must not be empty
      */
     public StoreItem(final String theName, final BigDecimal thePrice, final int theBq,
-                     final BigDecimal theBp) throws IllegalArgumentException {
+                 final BigDecimal theBp) throws IllegalArgumentException {
         super();
         new StoreItem(theName, thePrice);
-        if (theBq >= 0 && theBp.doubleValue() >= 0 && thePrice.doubleValue() >= 0) {
+
+        //Checks if objects are null
+        Objects.requireNonNull(theName, "theName can't be null.");
+        Objects.requireNonNull(thePrice, "thePrice can not be null.");
+        Objects.requireNonNull(theBp, "theBP cannot be null");
+
+        //Checks if quantities are less than zero and if theName is empty.
+        if (thePrice.doubleValue() > 0 || theBq > 0 || theBp.doubleValue() < 0
+                || theName.isEmpty()) {
+            throw new IllegalArgumentException("Parameters must not be negative and theName "
+                    + "must not be empty");
+        } else {
             myName = theName;
             myPrice = thePrice;
             myBq = theBq;
             myBp = theBp;
-            //myIsBulk = true;
-        } else {
-            throw new IllegalArgumentException("Parameters must be greater than zero");
         }
     }
 
@@ -166,4 +176,4 @@ public class StoreItem implements Item {
     public int hashCode() {
         return Objects.hash(myName, myPrice, myBq, myBp);
     }
-}
+    }

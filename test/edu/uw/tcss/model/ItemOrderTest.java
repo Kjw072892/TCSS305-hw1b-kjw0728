@@ -29,6 +29,11 @@ class ItemOrderTest {
      */
     private static final int NEG_ORDER_QUANT = -5;
 
+    /**
+     * The zero quantity variable for testing
+     */
+    private static final int ZERO = 0;
+
 
     /**
      * The name of the item used in testing.
@@ -59,6 +64,7 @@ class ItemOrderTest {
      */
     @Test
     void testConstructorNullItem() {
+
         assertAll("Item object as null object in constructor.",
                 () -> assertThrows(NullPointerException.class,
                         () -> new StoreItemOrder(null, ORDER_QUANT),
@@ -77,6 +83,15 @@ class ItemOrderTest {
                         () -> new StoreItemOrder(TEST_STORE_ITEM, NEG_ORDER_QUANT),
                         "Expecting IllegalArgumentException, instead got "
                                 + NEG_ORDER_QUANT)
+        );
+    }
+
+    @Test
+    void testConstructorZeroQuantity() {
+        assertAll("Zero quantity in constructor.",
+                () -> assertThrows(IllegalArgumentException.class,
+                        () -> new StoreItemOrder(TEST_STORE_ITEM, ZERO),
+                        "Expecting IllegalArgumentException, instead got " + ZERO)
         );
     }
 
