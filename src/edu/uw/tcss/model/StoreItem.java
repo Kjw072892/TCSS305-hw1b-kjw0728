@@ -60,7 +60,7 @@ public class StoreItem implements Item {
 
         this(theName, thePrice, 0, BigDecimal.ZERO);
 
-}
+    }
 
     /**
      *
@@ -176,4 +176,4 @@ public class StoreItem implements Item {
     public int hashCode() {
         return Objects.hash(myName, myPrice, myBq, myBp);
     }
-    }
+}
