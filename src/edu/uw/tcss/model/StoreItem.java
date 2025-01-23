@@ -55,8 +55,7 @@ public class StoreItem implements Item {
      * @throws IllegalArgumentException when thePrice is less than zero.
      * @throws NullPointerException when theName is null.
      */
-    public StoreItem(final String theName, final BigDecimal thePrice)
-        throws IllegalArgumentException, NullPointerException {
+    public StoreItem(final String theName, final BigDecimal thePrice) {
 
         this(theName, thePrice, 0, BigDecimal.ZERO);
 
@@ -77,7 +76,6 @@ public class StoreItem implements Item {
     public StoreItem(final String theName, final BigDecimal thePrice, final int theBq,
                  final BigDecimal theBp) throws IllegalArgumentException {
         super();
-        new StoreItem(theName, thePrice);
 
         //Checks if objects are null
         Objects.requireNonNull(theName, "theName can't be null.");
@@ -85,7 +83,7 @@ public class StoreItem implements Item {
         Objects.requireNonNull(theBp, "theBP cannot be null");
 
         //Checks if quantities are less than zero and if theName is empty.
-        if (thePrice.doubleValue() > 0 || theBq > 0 || theBp.doubleValue() < 0
+        if (thePrice.doubleValue() < 0 || theBq < 0 || theBp.doubleValue() < 0
                 || theName.isEmpty()) {
             throw new IllegalArgumentException("Parameters must not be negative and theName "
                     + "must not be empty");
