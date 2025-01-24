@@ -139,5 +139,14 @@ class ItemOrderTest {
         );
     }
 
-
+    @Test
+    void testToString() {
+        assertAll("Testing the toString method for format.",
+                () ->  assertEquals("[Name-" + TEST_STORE_ITEM.getName() + " : Qty-"
+                                + TEST_ITEM_ORDER.getQuantity() + "]",
+                        TEST_ITEM_ORDER.toString(),
+                        "To string should be " + "[Name-" + TEST_STORE_ITEM.getName()
+                                + " : Qty-" + TEST_ITEM_ORDER.getQuantity() + "]")
+        );
+    }
 }

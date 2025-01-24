@@ -269,6 +269,17 @@ public class CartTest {
         );
     }
 
+    @Test
+    void testToString() {
+        assertAll("Testing to string method for format.",
+                () -> assertEquals(
+                        "Shopping Cart= " + TEST_SHOPPING_CART,
+                        STORE_CART_INST.toString(),
+                        "toString() should return: " + "Shopping Cart= "
+                                + TEST_SHOPPING_CART)
+        );
+    }
+
 
 
 
