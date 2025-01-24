@@ -36,21 +36,22 @@ public class StoreCart implements Cart {
 
         final String itemName = theOrder.getItem().getName();
 
-        // Checks if the hashTable myShoppingCart contains the key (item name)
+        // Checks the order is in the shopping cart already
         if (myShoppingCart.containsKey(itemName)) {
+
             // Checks if the obj are equal and 'theOrder' quantity is not zero.
-            if (myShoppingCart.get(itemName).getItem().equals(theOrder.getItem())
-                    && theOrder.getQuantity() != 0) {
+            if (theOrder.getQuantity() != 0) {
                 myShoppingCart.replace(itemName, theOrder);
 
             }
-            //removes the item from the shopping cart if quantity of item order is zero.
-            if (theOrder.getQuantity() != myShoppingCart.get(itemName).getQuantity()
-                    || theOrder.getQuantity() == 0) {
-                myShoppingCart.remove(itemName, theOrder);
-            }
 
+            //removes the item from the shopping cart if quantity of item order is zero.
+            if (theOrder.getQuantity() == 0) {
+                myShoppingCart.remove(itemName);
+
+            }
         } else {
+            //adds the order to the shopping cart
             if (theOrder.getQuantity() != 0) {
                 myShoppingCart.put(itemName, theOrder);
             }

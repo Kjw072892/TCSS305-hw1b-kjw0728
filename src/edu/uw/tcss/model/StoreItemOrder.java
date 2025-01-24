@@ -26,6 +26,8 @@ public final class StoreItemOrder implements ItemOrder {
      *
      * @param theItem The object reference of the Item object.
      * @param theQuantity The quantity of the given Item; object type inte.
+     * @throws IllegalArgumentException The quantity must not be less than zero
+     * @throws NullPointerException theItem must not be null
      */
     public StoreItemOrder(final Item theItem, final int theQuantity)
             throws IllegalArgumentException, NullPointerException {
@@ -33,10 +35,10 @@ public final class StoreItemOrder implements ItemOrder {
         super();
 
         //Checks if object passed is null or if quantity is less than 0
-        Objects.requireNonNull(theItem);
+        Objects.requireNonNull(theItem, "theItem must not be null");
 
-        if (theQuantity <= 0) {
-            throw new IllegalArgumentException("The quantity must be greater than zero");
+        if (theQuantity < 0) {
+            throw new IllegalArgumentException("The quantity must not be less than zero");
         } else {
             myItem = theItem;
             myQuantity = theQuantity;
@@ -63,7 +65,7 @@ public final class StoreItemOrder implements ItemOrder {
      */
     @Override
     public String toString() {
-        return "Item Name= " + myItem.getName() + " (Quantity= " + myQuantity + ")";
+        return "[Name-" + myItem.getName() + " : Qty-" + myQuantity + "]";
     }
 
 }
