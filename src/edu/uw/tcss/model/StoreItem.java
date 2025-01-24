@@ -7,7 +7,7 @@ import java.util.Objects;
 
 /**
  *  @author Kassie Whitney
- * @version 1.20.25
+ * @version 1.23.25
  */
 public class StoreItem implements Item {
 
@@ -57,7 +57,7 @@ public class StoreItem implements Item {
      */
     public StoreItem(final String theName, final BigDecimal thePrice) {
 
-        this(theName, thePrice, 0, BigDecimal.ZERO);
+        this(theName, thePrice, DEFAULT_INT, DEFAULT_BD);
 
     }
 
@@ -83,8 +83,8 @@ public class StoreItem implements Item {
         Objects.requireNonNull(theBp, "theBP cannot be null");
 
         //Checks if quantities are less than zero and if theName is empty.
-        if (thePrice.doubleValue() < 0 || theBq < 0 || theBp.doubleValue() < 0
-                || theName.isEmpty()) {
+        if (thePrice.doubleValue() < DEFAULT_INT || theBq < DEFAULT_INT
+                || theBp.compareTo(DEFAULT_BD) < 0 || theName.isEmpty()) {
             throw new IllegalArgumentException("Parameters must not be negative and theName "
                     + "must not be empty");
         } else {
@@ -118,7 +118,7 @@ public class StoreItem implements Item {
     @Override
     public boolean isBulk() {
 
-        return myBq > 0;
+        return myBq > DEFAULT_INT;
     }
 
     /**
@@ -140,7 +140,7 @@ public class StoreItem implements Item {
 
         final String frmtBulkPrice = nf.format(myBp);
 
-        if (myBq > 0) {
+        if (myBq > DEFAULT_INT) {
             itemInfo = myName + ", " + frmtPrice + " (" + myBq + " for " + frmtBulkPrice + ")";
 
         } else {

@@ -242,7 +242,7 @@ public final class R {
         /** Message on Register Button. */
         public static final String LF_BUTTON_REGISTER = "Register";
         
-        /** Message on user name Label. */
+        /** Message on username Label. */
         public static final String LF_LABEL_USERNAME = "Username:";
         
         /** Message on password Label. */

@@ -1,12 +1,16 @@
 package edu.uw.tcss.model;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertAll;
+
 import java.math.BigDecimal;
 import java.util.Hashtable;
 import java.util.Map;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
+
+
 
 /**
  * @author Kassie Whitney

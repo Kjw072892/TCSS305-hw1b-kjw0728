@@ -4,7 +4,7 @@ import java.util.Objects;
 
 /**
  * @author Kassie Whitney
- * @version 1.15.25
+ * @version 1.22.25
  */
 public final class StoreItemOrder implements ItemOrder {
     /**
