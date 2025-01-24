@@ -31,7 +31,6 @@ public class StoreCart implements Cart {
 
     }
 
-
     @Override
     public void add(final ItemOrder theOrder) {
 
@@ -43,12 +42,14 @@ public class StoreCart implements Cart {
             if (myShoppingCart.get(itemName).getItem().equals(theOrder.getItem())
                     && theOrder.getQuantity() != 0) {
                 myShoppingCart.replace(itemName, theOrder);
+
             }
-            //removes the item from the shopping cart if
+            //removes the item from the shopping cart if quantity of item order is zero.
             if (theOrder.getQuantity() != myShoppingCart.get(itemName).getQuantity()
                     || theOrder.getQuantity() == 0) {
-                myShoppingCart.remove(itemName);
+                myShoppingCart.remove(itemName, theOrder);
             }
+
         } else {
             if (theOrder.getQuantity() != 0) {
                 myShoppingCart.put(itemName, theOrder);

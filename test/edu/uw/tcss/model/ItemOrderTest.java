@@ -56,7 +56,8 @@ class ItemOrderTest {
      * The name of the item being ordered used in testing.
      */
     private static final ItemOrder TEST_ITEM_ORDER = new StoreItemOrder(
-            new StoreItem(ITEM_NAME, new BigDecimal(STORE_ITEM_PRICE)), ORDER_QUANT);
+            new StoreItem(ITEM_NAME, new BigDecimal(STORE_ITEM_PRICE)),
+            ORDER_QUANT);
 
 
     /**
