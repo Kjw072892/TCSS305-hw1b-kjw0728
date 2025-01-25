@@ -1,7 +1,9 @@
 package edu.uw.tcss.model;
 
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertAll;
+
 
 import java.math.BigDecimal;
 import java.util.Hashtable;
@@ -10,41 +12,23 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 
-
-
 /**
  * @author Kassie Whitney
  * @version 1.20.25
  */
 public class CartTest {
 
-    /**
-     * Item name for item quantity change test
-     */
-
-    private static final String ITEM_IN_SHOPPINGCART = "ITEM1";
-
-    /**
+     /**
      * Number of items thats been added to shopping cart
      */
     private static final int MAX_NUMBER_OF_ITEMS = 6;
-
-    /**
-     * BigDecimal price for store item
-     */
-    private static final BigDecimal ITEM_PRICE = BigDecimal.valueOf(2.00);
-
-    /**
-     * Cost of all goods with membership
-     */
-    private static final BigDecimal PRICE_WITH_MEMBERSHIP = new BigDecimal("36.00");
 
     /**
      * Cost of all goods without membership discount
      */
     private static final BigDecimal PRICE_WITHOUT_MEMBERSHIP = new BigDecimal("52.00");
 
-    /**
+      /**
      * The name of the bulk item used in testing.
      */
     private static final String BULK_ITEM_NAME = "Bulk Item";
@@ -58,6 +42,22 @@ public class CartTest {
      * The bulk quantity of the item used in testing.
      */
     private static final int BULK_QUANTITY = 10;
+
+    /**
+     * Cost of all goods with membership
+     */
+    private static final BigDecimal PRICE_WITH_MEMBERSHIP = new BigDecimal("36.00");
+
+    /**
+     * Item name for item quantity change test
+     */
+
+    private static final String ITEM_IN_SHOPPINGCART = "ITEM1";
+
+    /**
+     * BigDecimal price for store item
+     */
+    private static final BigDecimal ITEM_PRICE = BigDecimal.valueOf(2.00);
 
     /**
      * Instance of StoreCart
@@ -91,12 +91,6 @@ public class CartTest {
             ITEM_PRICE);
 
     /**
-     * Bulk Test Item for Item Order
-     */
-    private static final StoreItem BULK_TEST_ITEM = new StoreItem(BULK_ITEM_NAME, ITEM_PRICE
-            , BULK_QUANTITY, new BigDecimal(BULK_PRICE));
-
-    /**
      * Object of type storeItemOrder for bulk testing
      */
     private static final StoreItemOrder TEST_BULK_ITEM_ORDER =
@@ -104,7 +98,7 @@ public class CartTest {
                         new BigDecimal(BULK_PRICE)), TEST_NEW_QUANTITY);
 
     /**
-     * Total number of indvidual items created for testing
+     * Total number of indvidual items in the TEST_SHOPPING_CART
      */
     private int myTotalNumOfItems;
 
@@ -123,6 +117,8 @@ public class CartTest {
 
     @BeforeEach
     void fillRealShoppingCart() {
+
+        //Iterates through the Test shopping cart and copies the content to live shopping cart
         for (final Map.Entry<String, ItemOrder> itemOrder : TEST_SHOPPING_CART.entrySet()) {
             STORE_CART_INST.add(itemOrder.getValue());
         }
@@ -143,6 +139,13 @@ public class CartTest {
 
     @Test
     void testNewItemQuantity() {
+        //STORE_CART_INST is set to a default value of with no bulk-items:
+        // Shopping Cart=
+        // {ITEM4=[Name-ITEM4 : Qty-4],
+        // ITEM3=[Name-ITEM3 : Qty-3],
+        // ITEM2=[Name-ITEM2 : Qty-2],
+        // ITEM1=[Name-ITEM1 : Qty-1],
+        // ITEM5=[Name-ITEM5 : Qty-5]}
 
         // Created a new itemOrder of an item already in shopping cart
         final ItemOrder overrideItemOrder =
@@ -174,6 +177,13 @@ public class CartTest {
 
     @Test
     void testZeroQuantityPassed() {
+        //STORE_CART_INST is set to a default value of with no bulk-items:
+        // Shopping Cart=
+        // {ITEM4=[Name-ITEM4 : Qty-4],
+        // ITEM3=[Name-ITEM3 : Qty-3],
+        // ITEM2=[Name-ITEM2 : Qty-2],
+        // ITEM1=[Name-ITEM1 : Qty-1],
+        // ITEM5=[Name-ITEM5 : Qty-5]}
 
         STORE_CART_INST.add(new StoreItemOrder(
                 new StoreItem(ITEM_IN_SHOPPINGCART, ITEM_PRICE), ZERO_QUANTITY));
@@ -193,18 +203,42 @@ public class CartTest {
 
     @Test
     void testNumberOfItemsInCartMatches() {
+        //STORE_CART_INST is set to a default value of with no bulk-items:
+        // Shopping Cart=
+        // {ITEM4=[Name-ITEM4 : Qty-4],
+        // ITEM3=[Name-ITEM3 : Qty-3],
+        // ITEM2=[Name-ITEM2 : Qty-2],
+        // ITEM1=[Name-ITEM1 : Qty-1],
+        // ITEM5=[Name-ITEM5 : Qty-5]}
+
         assertAll("Testing the quantity of items in shopping cart.",
                 () -> assertEquals(
                         myTotalNumOfItems,
                         STORE_CART_INST.getCartSize().itemCount(),
-                "Was expecting " + myTotalNumOfItems + ", but got "
-                        + STORE_CART_INST.getCartSize().itemCount())
+                "Your add method was not configured properly.")
         );
 
     }
 
     @Test
+    void testNotAddingItemsCorrectly() {
+        assertAll("Testing if the add method is adding items.",
+                () -> assertNotEquals(
+                        ZERO_CART_SIZE,
+                        STORE_CART_INST.getCartSize().itemOrderCount(),
+                        "Your add method did not add any items into your cart.")
+        );
+    }
+
+    @Test
     void testClearMethod() {
+        //STORE_CART_INST is set to a default value of with no bulk-items:
+        // Shopping Cart=
+        // {ITEM4=[Name-ITEM4 : Qty-4],
+        // ITEM3=[Name-ITEM3 : Qty-3],
+        // ITEM2=[Name-ITEM2 : Qty-2],
+        // ITEM1=[Name-ITEM1 : Qty-1],
+        // ITEM5=[Name-ITEM5 : Qty-5]}
 
         STORE_CART_INST.clear();
 
@@ -224,6 +258,14 @@ public class CartTest {
 
     @Test
     void testCalculateMethod() {
+        //STORE_CART_INST is set to a default value of with no bulk-items:
+        // Shopping Cart=
+        // {ITEM4=[Name-ITEM4 : Qty-4],
+        // ITEM3=[Name-ITEM3 : Qty-3],
+        // ITEM2=[Name-ITEM2 : Qty-2],
+        // ITEM1=[Name-ITEM1 : Qty-1],
+        // ITEM5=[Name-ITEM5 : Qty-5]}
+
         // adding bulk item into test shopping cart
         TEST_SHOPPING_CART.put(BULK_ITEM_NAME, TEST_BULK_ITEM_ORDER);
 
