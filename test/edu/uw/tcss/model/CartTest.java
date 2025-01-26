@@ -3,25 +3,27 @@ package edu.uw.tcss.model;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertAll;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 
 import java.math.BigDecimal;
 import java.util.Hashtable;
 import java.util.Map;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 
 /**
  * @author Kassie Whitney
- * @version 1.20.25
+ * @version 1.25.25
  */
 public class CartTest {
 
      /**
      * Number of items thats been added to shopping cart
      */
-    private static final int MAX_NUMBER_OF_ITEMS = 6;
+    private static final int MAX_NUMBER_OF_ITEMS = 5;
 
     /**
      * Cost of all goods without membership discount
@@ -100,18 +102,18 @@ public class CartTest {
     /**
      * Total number of indvidual items in the TEST_SHOPPING_CART
      */
-    private int myTotalNumOfItems;
+    private int myTotalNumOfTestItems;
 
 
     @BeforeEach
     void createItemOrder() {
         StoreItemOrder itemOrder;
-        for (int i = 1; i < MAX_NUMBER_OF_ITEMS; i++) {
+        for (int i = 1; i <= MAX_NUMBER_OF_ITEMS; i++) {
             itemOrder = new StoreItemOrder(new StoreItem("ITEM" + i,
                    ITEM_PRICE), i);
             TEST_SHOPPING_CART.put(itemOrder.getItem().getName(), itemOrder);
         }
-        myTotalNumOfItems =
+        myTotalNumOfTestItems =
                 TEST_SHOPPING_CART.values().stream().mapToInt(ItemOrder::getQuantity).sum();
     }
 
@@ -122,6 +124,11 @@ public class CartTest {
         for (final Map.Entry<String, ItemOrder> itemOrder : TEST_SHOPPING_CART.entrySet()) {
             STORE_CART_INST.add(itemOrder.getValue());
         }
+    }
+    @AfterEach
+    void revertShoppingCartToDefault() {
+        STORE_CART_INST.clear();
+        TEST_SHOPPING_CART.clear();
     }
 
 
@@ -161,13 +168,13 @@ public class CartTest {
         STORE_CART_INST.add(overrideItemOrder);
 
         // Storing the value of the number of items from the test shopping cart
-        myTotalNumOfItems = TEST_SHOPPING_CART.values().stream().
+        myTotalNumOfTestItems = TEST_SHOPPING_CART.values().stream().
                                 mapToInt(ItemOrder::getQuantity).sum();
 
         assertAll("Testing if shopping cart updates item quantity when similar item is"
                         + " passed.",
                 () -> assertEquals(
-                       myTotalNumOfItems,
+                        myTotalNumOfTestItems,
                         STORE_CART_INST.getCartSize().itemCount(),
                         "Your item quantity may not have gotten "
                                 + "updated in your add method.")
@@ -213,7 +220,7 @@ public class CartTest {
 
         assertAll("Testing the quantity of items in shopping cart.",
                 () -> assertEquals(
-                        myTotalNumOfItems,
+                        myTotalNumOfTestItems,
                         STORE_CART_INST.getCartSize().itemCount(),
                 "Your add method was not configured properly.")
         );
@@ -319,6 +326,32 @@ public class CartTest {
                         STORE_CART_INST.toString(),
                         "toString() should return: " + "Shopping Cart= "
                                 + TEST_SHOPPING_CART)
+        );
+    }
+
+    @Test
+    void testGetCartSize() {
+
+        assertAll("Testing the getCartSize method with a filled cart",
+                () -> assertEquals(
+                        myTotalNumOfTestItems,
+                        STORE_CART_INST.getCartSize().itemCount(),
+                        "Your getCartSize method did not record the correct number "
+                                + "of individual items."),
+                 () -> assertEquals(
+                        MAX_NUMBER_OF_ITEMS,
+                        STORE_CART_INST.getCartSize().itemOrderCount(),
+                        "Your getCartSize method did not record the correct number "
+                                + "of item orders.")
+        );
+
+        STORE_CART_INST.clear();
+
+        assertAll("Testing the getCartSize method with an empty cart",
+                () -> assertNotNull(
+                        STORE_CART_INST.getCartSize(),
+                        "Your getCartSize returned null, when it should have "
+                                + "return 0.")
         );
     }
 
