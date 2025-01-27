@@ -16,7 +16,7 @@ import org.junit.jupiter.api.Test;
 
 /**
  * @author Kassie Whitney
- * @version 1.25.25
+ * @version 1.26.25
  */
 public class CartTest {
 
@@ -225,6 +225,23 @@ public class CartTest {
                 "Your add method was not configured properly.")
         );
 
+    }
+
+    @Test
+    void testZeroQuantityItemOrderAsFirstItem() {
+        //STORE_CART_INST is empty
+
+        STORE_CART_INST.clear();
+
+        STORE_CART_INST.add(new StoreItemOrder(
+                new StoreItem(ITEM_IN_SHOPPINGCART, ITEM_PRICE), ZERO_QUANTITY));
+
+        assertAll("Testing the quantity of items in shopping cart.",
+                () -> assertEquals(
+                        0,
+                        STORE_CART_INST.getCartSize().itemOrderCount(),
+                        "Your cart added a zero quantity item order")
+        );
     }
 
     @Test
