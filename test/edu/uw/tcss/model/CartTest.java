@@ -314,7 +314,7 @@ public class CartTest {
                 () -> assertEquals(
                         PRICE_WITHOUT_MEMBERSHIP,
                         STORE_CART_INST.calculateTotal(),
-                        "Expected " + PRICE_WITH_MEMBERSHIP + ", but instead got "
+                        "Expected " + PRICE_WITHOUT_MEMBERSHIP + ", but instead got "
                         + STORE_CART_INST.calculateTotal())
         );
 
